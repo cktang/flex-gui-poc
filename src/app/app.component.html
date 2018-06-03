@@ -1,0 +1,25 @@
+
+    <div class="flex row" 
+         style="
+            width: 100vw;
+            height:100vh;">
+
+        <h3 class="ui header">POC</h3>
+
+        <gridster [options]="options" style="flex: 1">
+            <gridster-item [item]="item" *ngFor="let item of dashboard">
+                
+                <div class="gridster-item-inner">
+                    <div class="title"> {{item.title || "Title"}} </div>
+                    <div class="content flex row">
+                        <div class="main">
+                            <ndc-dynamic [ndcDynamicComponent]="item.component"></ndc-dynamic>
+                        </div>
+                        <div>{{item | json}}</div>
+                    </div>        
+                </div>
+            </gridster-item>
+        </gridster>
+    </div>
+    
+    
