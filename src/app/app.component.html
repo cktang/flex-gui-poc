@@ -7,19 +7,20 @@
         <h3 class="ui header">POC</h3>
 
         <gridster [options]="options" style="flex: 1">
-            <gridster-item [item]="item" *ngFor="let item of dashboard">
-                
-                <div class="gridster-item-inner">
-                    <div class="title"> {{item.title || "Title"}} </div>
-                    <div class="content flex row">
-                        <div class="main">
-                            <ndc-dynamic [ndcDynamicComponent]="item.component"></ndc-dynamic>
-                        </div>
-                        <div>{{item | json}}</div>
-                    </div>        
-                </div>
+            <gridster-item 
+                [item]="item" 
+                *ngFor="let item of dashboard" 
+                (click)="active(item)"
+                (mouseover)="hover(item)">
+
+                <base-component [item]="item"></base-component>
             </gridster-item>
         </gridster>
     </div>
     
-    
+    <!--
+                             <ndc-dynamic 
+                                [ndcDynamicInputs]="createObject(item)"
+                                [ndcDynamicComponent]="item.component"></ndc-dynamic>
+
+    -->

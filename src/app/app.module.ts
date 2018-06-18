@@ -13,11 +13,16 @@ import { AgGridModule } from 'ag-grid-angular';
 import { GridsterModule } from 'angular-gridster2';
 import { DynamicModule } from 'ng-dynamic-component';
 import { SpeedTestComponent } from './components/SpeedTestComponent';
+import { M } from './service/M';
+import { BaseComponent } from './components/BaseComponent';
+import { ComponentSelector } from './components/componentSelector';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    BaseComponent,
+    ComponentSelector,
 
     Component1,
     Component2,
@@ -38,7 +43,9 @@ import { SpeedTestComponent } from './components/SpeedTestComponent';
       SpeedTestComponent
     ])
   ], 
-  providers: [],
+  providers: [
+    M
+  ],
   bootstrap: [AppComponent]
 }) 
 export class AppModule { }

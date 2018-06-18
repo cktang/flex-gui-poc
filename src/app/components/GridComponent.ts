@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import * as _ from 'lodash';
+import { BaseComponent } from './BaseComponent';
+import { M } from '../service/M';
  
 @Component({
     selector: 'gridComponent',
@@ -13,7 +15,7 @@ import * as _ from 'lodash';
       </ag-grid-angular>
     `
   })
-  export class GridComponent implements OnInit {
+  export class GridComponent extends BaseComponent implements OnInit {
     columnDefs = [
         {headerName: 'ID', field: 'id' },
         {headerName: 'f1', field: 'f1' },
@@ -22,6 +24,10 @@ import * as _ from 'lodash';
     ];
 
     rowData: any;
+
+    constructor(m: M) {
+      super(m);
+    }
 
     ngOnInit() {
 
@@ -32,7 +38,7 @@ import * as _ from 'lodash';
             f2: _.random(),
             f3: _.random()
         }
-      );
+      });
 
       setInterval(_.bind(() => {
         // this.gridOptions.api.updateRowData({update: updates}

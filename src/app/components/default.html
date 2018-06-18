@@ -1,0 +1,33 @@
+
+<div class="gridster-item-inner"
+    [ngClass]="{
+        active:     status?.isSelected, 
+        hover:      status?.isHover, 
+        highlight:  status?.isHighlight}
+    ">
+    
+    <div class="title"> {{item.title || "Title"}} #{{item.id}}</div>
+
+    <div>
+
+        
+    </div>
+    <div class="ui label"> {{update$ | async}}</div>
+      
+    <div class="content flex row">
+        <div class="main">
+            <div class="ui basic segment">
+                <span class="ui label" [ngClass]="{red: !status.isSelected, green: status.isSelected}"> Selected </span>
+                <span class="ui label" [ngClass]="{red: !status.isHover, green: status.isHover}"> Hover </span>
+                <span class="ui label" [ngClass]="{red: !status.isHighlight, green: status.isHighlight}"> Highlight </span>
+            </div>
+            
+            <div class="ui basic segment">
+                <component-selector [item]="item"></component-selector>
+            </div>
+        </div>
+        <div>{{item | json}}</div>
+    </div>        
+</div>
+
+

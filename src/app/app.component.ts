@@ -1,14 +1,9 @@
-import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import { HttpClient } from '@angular/common/http'; 
-import { AgGridModule } from 'ag-grid-angular';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {CompactType, DisplayGrid, GridsterConfig, GridsterItem, GridType} from 'angular-gridster2';
 
 import * as _ from 'lodash';
-
-import { Component1 } from './components/Component1';
-import { Component2 } from './components/Component2';
-import { GridComponent } from './components/GridComponent';
-
+import { M } from './service/M';
+ 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -76,33 +71,20 @@ export class AppComponent implements OnInit {
         };
         
         this.dashboard = [
-            {cols: 2, rows: 1, y: 0, x: 0, component: this.getRandomComponent()},
-            {cols: 2, rows: 2, y: 0, x: 2, component: this.getRandomComponent()},
-            {cols: 1, rows: 1, y: 0, x: 4, component: this.getRandomComponent()},
-            {cols: 1, rows: 1, y: 2, x: 5, component: GridComponent, title: "Grid"}
+            {id: _.random(100000), cols: 2, rows: 1, y: 0, x: 0},
+            {id: _.random(100000), cols: 2, rows: 2, y: 0, x: 2},
+            {id: _.random(100000), cols: 1, rows: 1, y: 0, x: 4},
+            {id: _.random(100000), cols: 1, rows: 1, y: 1, x: 4}
         ]; 
+
+        this.m.dashboard$.next(_(this.dashboard).cloneDeep());
     }
 
-    changedOptions() {
-        if (this.options.api && this.options.api.optionsChanged) {
-            this.options.api.optionsChanged();
-        }
+    constructor(private m: M) {
+
     }
 
-    removeItem($event, item) {
-        $event.preventDefault();
-        $event.stopPropagation();
-        this.dashboard.splice(this.dashboard.indexOf(item), 1);
-    }
+    active = item => this.m.active$.next(item);
 
-    addItem() {
-        this.dashboard.push({x: 0, y: 0, cols: 1, rows: 1});
-    }
-
-    getRandomComponent = () => _([
-        Component1,
-        Component2,
-        GridComponent
-    ]).shuffle().first();
-
+    hover = item => this.m.hover$.next(item);
 }
